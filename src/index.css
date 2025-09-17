@@ -1,42 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&family=Spectral+SC:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Freedom Quest - Patriotic Vintage Design System */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Vintage Paper Background */
+    --background: 42 15% 96%;
+    --foreground: 25 25% 15%;
+    
+    /* Patriotic Colors - Indian Tricolor Inspired */
+    --saffron: 24 85% 60%;
+    --saffron-light: 24 85% 70%;
+    --saffron-dark: 24 85% 45%;
+    
+    --patriot-white: 42 25% 95%;
+    --patriot-cream: 42 20% 92%;
+    
+    --freedom-green: 140 60% 25%;
+    --freedom-green-light: 140 50% 35%;
+    --freedom-green-dark: 140 70% 20%;
+    
+    /* Vintage Accents */
+    --vintage-gold: 45 85% 55%;
+    --vintage-bronze: 30 45% 35%;
+    --vintage-sepia: 35 25% 85%;
+    --vintage-ink: 220 15% 25%;
+    
+    /* Semantic Tokens */
+    --primary: var(--freedom-green);
+    --primary-foreground: var(--patriot-white);
+    --primary-hover: var(--freedom-green-dark);
+    
+    --secondary: var(--saffron);
+    --secondary-foreground: var(--patriot-white);
+    --secondary-hover: var(--saffron-dark);
+    
+    --accent: var(--vintage-gold);
+    --accent-foreground: var(--vintage-ink);
+    
+    --card: var(--patriot-cream);
+    --card-foreground: var(--foreground);
+    
+    --muted: var(--vintage-sepia);
+    --muted-foreground: var(--vintage-ink);
+    
+    --border: 30 20% 80%;
+    --input: var(--patriot-cream);
+    --ring: var(--saffron);
+    
+    --destructive: 0 75% 55%;
+    --destructive-foreground: var(--patriot-white);
+    
+    /* Design System Variables */
+    --radius: 0.75rem;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --font-decorative: 'Spectral SC', serif;
+    
+    /* Shadows & Effects */
+    --shadow-vintage: 0 8px 32px hsla(30, 45%, 35%, 0.15);
+    --shadow-paper: inset 0 1px 3px hsla(30, 15%, 50%, 0.1);
+    --shadow-raised: 0 4px 12px hsla(30, 45%, 35%, 0.2);
+    
+    /* Gradients */
+    --gradient-tricolor: linear-gradient(135deg, 
+      hsl(var(--saffron)) 0%, 
+      hsl(var(--patriot-white)) 50%, 
+      hsl(var(--freedom-green)) 100%);
+    --gradient-paper: linear-gradient(145deg, 
+      hsl(var(--background)), 
+      hsl(var(--vintage-sepia)));
+    --gradient-vintage: linear-gradient(135deg, 
+      hsl(var(--vintage-gold)), 
+      hsl(var(--saffron)));
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -55,42 +98,15 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* Dark theme with vintage sepia tones */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 25 25% 8%;
+    --foreground: var(--patriot-cream);
+    --card: 25 25% 12%;
+    --card-foreground: var(--patriot-cream);
+    --muted: 25 15% 20%;
+    --muted-foreground: var(--vintage-sepia);
+    --border: 25 15% 25%;
   }
 }
 
@@ -101,5 +117,290 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsla(var(--saffron), 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsla(var(--freedom-green), 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsla(var(--vintage-gold), 0.02) 0%, transparent 50%);
+    background-attachment: fixed;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Vintage Paper Effect */
+  .paper-texture {
+    position: relative;
+    background: var(--gradient-paper);
+    box-shadow: var(--shadow-paper);
+  }
+
+  .paper-texture::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsla(var(--vintage-bronze), 0.1) 0%, transparent 25%),
+      radial-gradient(circle at 75% 75%, hsla(var(--vintage-bronze), 0.08) 0%, transparent 25%);
+    pointer-events: none;
+  }
+
+  /* Tricolor Glow Effect */
+  .tricolor-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tricolor-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: var(--gradient-tricolor);
+    opacity: 0.05;
+    animation: rotate-glow 20s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Vintage Border Styles */
+  .border-vintage {
+    border: 2px solid hsl(var(--vintage-bronze));
+    border-radius: var(--radius);
+    position: relative;
+  }
+
+  .border-vintage::before,
+  .border-vintage::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid hsl(var(--vintage-gold));
+  }
+
+  .border-vintage::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .border-vintage::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Character Card Styles */
+  .char-card {
+    @apply relative overflow-hidden rounded-xl;
+    background: var(--gradient-paper);
+    border: 3px solid hsl(var(--vintage-bronze));
+    box-shadow: var(--shadow-vintage);
+    transition: var(--transition-smooth);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .char-card:hover {
+    transform: translateY(-8px) rotateX(5deg);
+    box-shadow: 
+      var(--shadow-raised),
+      0 0 30px hsla(var(--saffron), 0.3),
+      0 0 60px hsla(var(--freedom-green), 0.2);
+  }
+
+  .char-card.locked {
+    filter: grayscale(80%) sepia(20%);
+    opacity: 0.7;
+  }
+
+  /* XP Chip Animation */
+  .xp-chip {
+    @apply fixed top-4 right-4 z-50;
+    background: var(--gradient-vintage);
+    color: hsl(var(--vintage-ink));
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-family: var(--font-decorative);
+    box-shadow: var(--shadow-raised);
+    border: 2px solid hsl(var(--vintage-bronze));
+    transition: var(--transition-bounce);
+  }
+
+  .xp-chip.pop {
+    transform: scale(1.15);
+    box-shadow: 
+      var(--shadow-raised),
+      0 0 20px hsla(var(--vintage-gold), 0.6);
+  }
+
+  /* Quiz Progress Styles */
+  .quiz-progress {
+    @apply mx-auto max-w-2xl p-4 rounded-lg;
+    background: var(--gradient-paper);
+    border: 2px solid hsl(var(--vintage-bronze));
+    box-shadow: var(--shadow-paper);
+  }
+
+  .progress-bar {
+    @apply h-3 rounded-full overflow-hidden;
+    background: hsla(var(--vintage-bronze), 0.3);
+    border: 1px solid hsl(var(--vintage-bronze));
+  }
+
+  .progress-fill {
+    @apply h-full transition-all duration-500 ease-out;
+    background: var(--gradient-tricolor);
+    box-shadow: 0 0 10px hsla(var(--saffron), 0.5);
+  }
+
+  /* Decorative Elements */
+  .decorative-corner {
+    position: relative;
+  }
+
+  .decorative-corner::before,
+  .decorative-corner::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid hsl(var(--vintage-gold));
+  }
+
+  .decorative-corner::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .decorative-corner::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+}
+
+@layer utilities {
+  /* Typography Utilities */
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-decorative {
+    font-family: var(--font-decorative);
+  }
+
+  .text-gradient-tricolor {
+    background: var(--gradient-tricolor);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-vintage {
+    background: var(--gradient-vintage);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animation Utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+
+  /* Interactive States */
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .hover-glow:hover {
+    box-shadow: 
+      var(--shadow-vintage),
+      0 0 30px hsla(var(--saffron), 0.4);
+  }
+}
+
+/* Keyframe Animations */
+@keyframes rotate-glow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px hsla(var(--vintage-gold), 0.4); }
+  to { box-shadow: 0 0 30px hsla(var(--saffron), 0.6); }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes pulse-correct {
+  0% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 hsla(var(--freedom-green), 0.4);
+  }
+  70% { 
+    transform: scale(1.02); 
+    box-shadow: 0 0 0 10px hsla(var(--freedom-green), 0);
+  }
+  100% { 
+    transform: scale(1); 
+  }
+}
+
+@keyframes shake-wrong {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.animate-pulse-correct {
+  animation: pulse-correct 0.7s ease-out;
+}
+
+.animate-shake-wrong {
+  animation: shake-wrong 0.42s ease-in-out;
 }
