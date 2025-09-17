@@ -59,7 +59,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                 <h4 className="font-semibold">Answer Quizzes</h4>
                 <p className="text-sm text-muted-foreground">
                   Test your knowledge with historical questions. Correct answers give +50 XP. 
-                  Wrong answers reset your XP and restart the quiz.
+                  Wrong answers reset your XP to the level you started the character with and restart the quiz.
                 </p>
               </div>
             </div>

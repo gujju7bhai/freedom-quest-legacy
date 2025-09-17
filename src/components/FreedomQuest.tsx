@@ -10,6 +10,7 @@ import { XPChip } from './XPChip';
 import { SettingsModal } from './SettingsModal';
 import { OnboardingModal } from './OnboardingModal';
 import { useGameState } from '../hooks/useGameState';
+import { initializeAudio } from '../utils/sounds';
 import heroBackground from '@/assets/hero-background.jpg';
 
 type Screen = 'menu' | 'character-select' | 'story' | 'quiz' | 'report';
@@ -26,6 +27,21 @@ export const FreedomQuest: React.FC = () => {
     if (!hasSeenOnboarding) {
       setShowOnboarding(true);
     }
+    
+    // Initialize audio on first user interaction
+    const initAudio = () => {
+      initializeAudio();
+      document.removeEventListener('click', initAudio);
+      document.removeEventListener('keydown', initAudio);
+    };
+    
+    document.addEventListener('click', initAudio);
+    document.addEventListener('keydown', initAudio);
+    
+    return () => {
+      document.removeEventListener('click', initAudio);
+      document.removeEventListener('keydown', initAudio);
+    };
   }, []);
 
   const navigateToScreen = (screen: Screen) => {

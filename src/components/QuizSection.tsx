@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { GameState } from '../hooks/useGameState';
+import { playCorrectSound, playIncorrectSound, playXPGainSound } from '../utils/sounds';
 
 interface Question {
   q: string;
@@ -70,21 +71,21 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [sessionXP, setSessionXP] = useState(0);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [characterStartXP, setCharacterStartXP] = useState(0);
 
   const questions = currentCharacter ? quizData[currentCharacter] || [] : [];
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   useEffect(() => {
-    // Reset quiz state when character changes
+    // Reset quiz state when character changes and store starting XP
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
     setShowFeedback(false);
-    setSessionXP(0);
     setHasAnswered(false);
-  }, [currentCharacter]);
+    setCharacterStartXP(gameState.xp); // Remember XP at character start
+  }, [currentCharacter, gameState.xp]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -126,14 +127,24 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
     const isCorrect = answerIndex === currentQuestion.a;
     
     if (isCorrect) {
-      // Award XP for correct answer
-      const newSessionXP = sessionXP + 50;
-      setSessionXP(newSessionXP);
+      // Play correct sound and award XP
+      if (gameState.sound) {
+        playCorrectSound();
+        setTimeout(() => {
+          playXPGainSound();
+        }, 300);
+      }
+      
+      // Award XP for correct answer (add to current total)
       onUpdateGameState({ xp: gameState.xp + 50 });
     } else {
-      // Reset XP on wrong answer and restart quiz
-      setSessionXP(0);
-      onUpdateGameState({ xp: 0 });
+      // Play incorrect sound
+      if (gameState.sound) {
+        playIncorrectSound();
+      }
+      
+      // Reset XP to character start point and restart quiz
+      onUpdateGameState({ xp: characterStartXP });
       setTimeout(() => {
         restartQuiz();
       }, 2000);
@@ -145,7 +156,6 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
     setShowFeedback(false);
-    setSessionXP(0);
     setHasAnswered(false);
   };
 
@@ -246,9 +256,9 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
                 <p className="text-sm mt-1 opacity-90">
                   {currentQuestion.explanation}
                 </p>
-                {isWrong && (
+              {isWrong && (
                   <p className="text-sm mt-2 font-medium">
-                    XP reset to 0. Quiz will restart...
+                    XP reset to starting level ({characterStartXP}). Quiz will restart...
                   </p>
                 )}
               </div>
