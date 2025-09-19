@@ -7,7 +7,7 @@ interface MainMenuProps {
 
 export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
   return (
-    <div className="flex min-h-[80vh] items-center justify-center">
+    <div className="flex min-h-[80vh] items-center justify-center bg-muted/20">
       <div className="text-center space-y-8 animate-slide-up">
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl font-heading font-bold text-gradient-tricolor leading-tight decorative-corner">
