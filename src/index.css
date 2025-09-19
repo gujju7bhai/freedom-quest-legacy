@@ -292,10 +292,18 @@
   }
 
   .text-gradient-tricolor {
+    color: hsl(var(--vintage-ink)); /* Fallback color */
     background: var(--gradient-tricolor);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Fallback for browsers that don't support background-clip */
+  @supports not (-webkit-background-clip: text) {
+    .text-gradient-tricolor {
+      color: hsl(var(--freedom-green));
+    }
   }
 
   .text-gradient-vintage {
